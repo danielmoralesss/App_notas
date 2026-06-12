@@ -14,10 +14,6 @@ Aplicación móvil desarrollada en **Flutter** para crear, editar, consultar, el
 <b>Icono de la app</b><br><br>
 <img src="assets/images/iconoapp1.png" width="120" alt="Icono app"/>
 </td>
-<td align="center">
-<b>Logo Unison</b><br><br>
-<img src="assets/images/unison_logo.png" width="120" alt="Unison logo"/>
-</td>
 </tr>
 </table>
 </div>
@@ -154,14 +150,6 @@ Se incluyen capturas de pantalla y recursos en `assets/images` y `assets/screens
 <td align="center"><img src="assets/screenshots/12.jpeg" width="220" alt="Pantalla 12"/></td>
 <td align="center"><img src="assets/screenshots/13.jpeg" width="220" alt="Pantalla 13"/></td>
 <td align="center"><img src="assets/screenshots/14.jpeg" width="220" alt="Pantalla 14"/></td>
-</tr>
-</table>
-</div>
-
-<div align="center">
-<table>
-<tr>
-<td align="center"><img src="assets/screenshots/15.jpeg" width="220" alt="Pantalla 15"/></td>
 </tr>
 </table>
 </div>
