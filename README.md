@@ -1,91 +1,199 @@
-# UniNotas Carpetas
+# UniNotas — App de Notas por Carpetas
 
-Aplicación móvil desarrollada en Flutter para crear, editar, consultar, eliminar y organizar notas dentro de carpetas personalizadas.
+Aplicación móvil desarrollada en **Flutter** para crear, editar, consultar, eliminar y organizar notas locales dentro de carpetas personalizadas.
 
-## Descripción
+<br>
+<div align="center">
+<table>
+<tr>
+<td align="center">
+<b>Escudo UNISON</b><br><br>
+<img src="assets/images/ESCUDO-COLOR.png" width="120" alt="Escudo UNISON"/>
+</td>
+<td align="center">
+<b>Icono de la app</b><br><br>
+<img src="assets/images/iconoapp1.png" width="120" alt="Icono app"/>
+</td>
+<td align="center">
+<b>Logo Unison</b><br><br>
+<img src="assets/images/unison_logo.png" width="120" alt="Unison logo"/>
+</td>
+</tr>
+</table>
+</div>
 
-Esta versión elimina por completo las notas compartidas y el flujo de sincronización en la nube. La app ahora trabaja como una libreta local organizada por carpetas: el usuario puede crear categorías como Escuela, Trabajo, Pendientes o Personal, y asignar cada nota a una de ellas.
+---
 
-## Integrantes
+## 👨‍💻 Integrantes
 
 - Daniel Morales
 - Dilan Bañuelos
 
-## Funcionalidades principales
+---
 
-- Pantalla de inicio con escudo de la Universidad de Sonora, nombre de la app e integrantes.
-- Lista de notas guardadas en el dispositivo.
-- Creación de notas con título obligatorio, contenido opcional, color y carpeta.
-- Edición de título, contenido, color y carpeta de una nota existente.
-- Eliminación de notas con mensaje de confirmación.
-- Creación, edición y eliminación de carpetas.
-- Al eliminar una carpeta, las notas se mueven automáticamente a la carpeta General.
-- Buscador por título, contenido o carpeta.
-- Almacenamiento local con Hive.
+## 📌 Descripción del proyecto
 
-## Diseño
+`UniNotas` es una libreta de notas local organizada por carpetas. La aplicación está pensada para uso personal y académico: permite crear categorías (Escuela, Trabajo, Pendientes, Personal), y administrar notas con metadatos como color y carpeta asociada.
 
-El rediseño usa una línea visual institucional basada en colores UNISON:
+Características principales:
 
-- Azul Unison: `#00529E`
-- Azul oscuro Unison: `#015294`
-- Dorado Unison: `#F8BB00`
-- Dorado oscuro Unison: `#D99E30`
+- Almacenamiento local con Hive (sin sincronización en la nube).
+- Crear, editar y eliminar notas con título obligatorio y contenido opcional.
+- Organización por carpetas: crear/editar/eliminar carpetas; al eliminar una carpeta las notas se reasignan a la carpeta General.
+- Búsqueda por título, contenido o carpeta.
+- Selección de color para cada nota y vista previa en tarjetas.
+- Interfaz con estilo institucional UNISON.
 
-La interfaz se reorganizó con tarjetas, chips de carpetas, fondo claro y encabezado institucional para que sea más intuitiva en teléfono.
+---
 
-## Tecnologías utilizadas
+## 🛠 Tecnologías utilizadas
 
-- Flutter 3.x
-- Dart 3.x
-- Hive `^2.2.3`
-- Hive Flutter `^1.1.0`
-- UUID `^4.3.3`
-- Flutter Color Picker `^1.1.0`
+- Flutter SDK (3.x)
+- Dart (3.x)
+- Hive, hive_flutter
+- uuid
+- flutter_colorpicker (u otras utilidades de UI)
 
-## Estructura relevante
+---
 
-```text
-lib/
-  app.dart
-  main.dart
-  data/
-    notes_repo.dart
-  models/
-    category.dart
-    note.dart
-  screens/
-    welcome_screen.dart
-    notes_screen.dart
-    note_form_screen.dart
-    note_view_screen.dart
-  widgets/
-    color_picker.dart
-    note_card.dart
-  utils/
-    constants.dart
-    date_format.dart
-```
-
-## Ejecución
+## 🧩 Estructura del proyecto (`lib/`)
 
 ```bash
+lib/
+├── main.dart
+├── app.dart
+├── data/
+│   └── notes_repo.dart           # Persistencia local con Hive
+├── models/
+│   ├── category.dart             # Modelo de carpeta
+│   └── note.dart                 # Modelo de nota (id, title, body, color, folderId, createdAt)
+├── screens/
+│   ├── welcome_screen.dart
+│   ├── notes_screen.dart         # Lista filtrable y búsqueda
+│   ├── note_form_screen.dart     # Crear / Editar nota
+│   └── note_view_screen.dart     # Ver nota en detalle
+├── widgets/
+│   ├── color_picker.dart
+│   └── note_card.dart            # Tarjeta visual para cada nota
+└── utils/
+    ├── constants.dart
+    └── date_format.dart
+```
+
+---
+
+## 🔍 Clases y componentes clave
+
+- `Note` (models/note.dart): contiene `id`, `title`, `body`, `colorHex`, `folderId`, `createdAt`, `updatedAt`.
+- `Category` (models/category.dart): `id`, `name`, `colorHex`, `order`.
+- `NotesRepository` (data/notes_repo.dart): interfaz para leer/escribir notas y carpetas en Hive; mueve notas a `General` al borrar carpetas.
+- `NotesScreen`: lista con filtros por carpeta y barra de búsqueda; muestra `NoteCard` con color y acciones rápidas.
+- `NoteFormScreen`: validación del título obligatorio y selección de carpeta y color.
+
+---
+
+## 🎯 Flujo de la aplicación
+
+1. `WelcomeScreen` muestra la marca y acceso a `NotesScreen`.
+2. `NotesScreen` muestra las notas por defecto de la carpeta seleccionada.
+3. El usuario puede crear o editar notas en `NoteFormScreen`.
+4. Al eliminar una carpeta, `NotesRepository` reasigna notas a la carpeta `General`.
+
+---
+
+## 🖼 Imágenes y capturas
+
+Se incluyen capturas de pantalla y recursos en `assets/images` y `assets/screenshots`.
+
+### Capturas (pantallas)
+
+<div align="center">
+<table>
+<tr>
+<td align="center"><img src="assets/screenshots/I1.jpeg" width="220" alt="Pantalla Inicio"/></td>
+<td align="center"><img src="assets/screenshots/1.jpeg" width="220" alt="Pantalla 1"/></td>
+<td align="center"><img src="assets/screenshots/2.jpeg" width="220" alt="Pantalla 2"/></td>
+</tr>
+</table>
+</div>
+
+<div align="center">
+<table>
+<tr>
+<td align="center"><img src="assets/screenshots/3.jpeg" width="220" alt="Pantalla 
+3"/></td>
+<td align="center"><img src="assets/screenshots/4.jpeg" width="220" alt="Pantalla 4"/></td>
+<td align="center"><img src="assets/screenshots/5.jpeg" width="220" alt="Pantalla 5"/></td>
+</tr>
+</table>
+</div>
+
+<div align="center">
+<table>
+<tr>
+<td align="center"><img src="assets/screenshots/6.jpeg" width="220" alt="Pantalla 6"/></td>
+<td align="center"><img src="assets/screenshots/7.jpeg" width="220" alt="Pantalla 7"/></td>
+<td align="center"><img src="assets/screenshots/8.jpeg" width="220" alt="Pantalla 8"/></td>
+</tr>
+</table>
+</div>
+
+<div align="center">
+<table>
+<tr>
+<td align="center"><img src="assets/screenshots/9.jpeg" width="220" alt="Pantalla 9"/></td>
+<td align="center"><img src="assets/screenshots/10.jpeg" width="220" alt="Pantalla 10"/></td>
+<td align="center"><img src="assets/screenshots/11.jpeg" width="220" alt="Pantalla 11"/></td>
+</tr>
+</table>
+</div>
+
+<div align="center">
+<table>
+<tr>
+<td align="center"><img src="assets/screenshots/12.jpeg" width="220" alt="Pantalla 12"/></td>
+<td align="center"><img src="assets/screenshots/13.jpeg" width="220" alt="Pantalla 13"/></td>
+<td align="center"><img src="assets/screenshots/14.jpeg" width="220" alt="Pantalla 14"/></td>
+</tr>
+</table>
+</div>
+
+<div align="center">
+<table>
+<tr>
+<td align="center"><img src="assets/screenshots/15.jpeg" width="220" alt="Pantalla 15"/></td>
+</tr>
+</table>
+</div>
+
+---
+
+## ▶️ Instrucciones para ejecutar
+
+```bash
+flutter clean
 flutter pub get
 flutter run
 ```
 
-## Compilar APK
+### Generar APK
 
 ```bash
 flutter build apk --release
 ```
 
-## Cambios realizados sobre la versión anterior
+Archivo generado:
 
-- Se retiró la navegación y lógica de notas compartidas.
-- Se retiró la dependencia funcional de Supabase, Railway, API REST, autenticación y conectividad.
-- Se agregó el modelo `NoteCategory`.
-- Se agregó agrupación de notas por carpetas.
-- Se actualizó el formulario para seleccionar carpeta.
-- Se actualizó la pantalla principal para mostrar filtros por carpeta.
-- Se actualizaron los nombres de los integrantes.
+```
+build/app/outputs/flutter-apk/app-release.apk
+```
+
+---
+
+## 🧪 Estado actual
+
+- ✅ Aplicación local por carpetas con creación/edición/eliminación de notas
+- ✅ Búsqueda y filtrado por carpeta
+- ✅ Persistencia local con Hive
+
+---
